@@ -28,4 +28,5 @@ This would for example enable:
 Screenshot
 ----------
 This is from a hack prototype:
-![Screenshot](https://raw.githubusercontent.com/petrushy/CesiumWidget/master/screenshot.png)
+
+[Screenshot](screenshot.png)
