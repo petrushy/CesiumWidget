@@ -29,5 +29,5 @@ Screenshot
 ----------
 This is from a hack prototype:
 <p align="center">
-<img src="https://github.com/petrushy/CesiumWidget/screenshot.png" width="50%" />
+<img src="https://raw.githubusercontent.com/petrushy/CesiumWidget/master/screenshot.png" width="50%" />
 </p>
