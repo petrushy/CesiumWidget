@@ -25,5 +25,3 @@ This would for example enable:
 * ...
 
 
-The inital version of this widget was generated with the cookie
-https://github.com/audreyr
