@@ -5,6 +5,9 @@
  * @copyright Petrus Hyvonen 2014
  * @version 0.1.0
  * @license Apache
+
+TODO: not sure css loading works, add CSS loading to /nbextensions/CesiumWidget/cesium/Build/Cesium/Widgets/widgets.css
+
  */
 
 var cesium_path = IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Build/Cesium/Cesium';
@@ -40,10 +43,13 @@ define(
                 this.$frame = $('<div/>').height(HEIGHT).width(WIDTH).uniqueId().appendTo(this.$el);
 
                 this.cesiumId = this.$frame[0].id;
+                this.has_drawn = false;
 
                 // call an update once the node has been added to the DOM
 
                 //_.defer(_.bind(this.update, this));
+                // Wait for element to be added to the DOM
+                this.once('displayed', this.update, this);
 
             },
 
@@ -56,7 +62,8 @@ define(
 
                 // Create Cesiumjs Viewer if not already there
                 // Seems to need to be here to access the DIV id
-                if (typeof this.viewer == 'undefined') {
+                if (!this.has_drawn) {
+                    this.has_drawn = true;
                     this.viewer = new Cesium.Viewer(this.cesiumId);
                 }
 

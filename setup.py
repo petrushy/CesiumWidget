@@ -18,7 +18,7 @@ except:
     pip.main(['install', 'jupyter-pip']);
     cmdclass = importlib.import_module('jupyterpip').cmdclass
 
-readme = open('README.rst').read()
+readme = open('README.md').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
