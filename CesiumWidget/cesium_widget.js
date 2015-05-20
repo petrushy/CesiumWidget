@@ -28,7 +28,14 @@ define(
         'widgets/js/widget',
         'widgets/js/manager',
         '/nbextensions/CesiumWidget/cesium/Build/Cesium/Cesium.js'], function ($, _, widget, manager, Cesium) {
+        
         'use strict';
+
+        var cssref = $('<link/>')
+        .attr('rel', 'stylesheet')
+        .attr('type', 'text/css')
+        .attr('href', IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Build/Cesium/Widgets/widgets.css')
+        .appendTo($('head'));
         console.log('Running function');
 
         var CesiumView = widget.DOMWidgetView.extend({
@@ -51,8 +58,8 @@ define(
                 //_.defer(_.bind(this.update, this));
                 // Wait for element to be added to the DOM
                 //this.once('displayed', this.myupdate, this);
-
-                this.after_displayed(this.update, this);
+                var that = this;
+                this.after_displayed(that.myupdate, that);
                 //return this;
 
             },
@@ -61,7 +68,7 @@ define(
             // Do things that are updated every time `this.model` is changed...
             // on the front-end or backend.
 
-            update: function () {
+            myupdate: function () {
                 console.log('Running Update');
 
                 // Create Cesiumjs Viewer if not already there
