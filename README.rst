@@ -29,4 +29,4 @@ Screenshot
 ----------
 This is from a hack prototype:
 
-[Screenshot](screenshot.png)
+![Screenshot](petrushy.github.com/CesiumWidget/screenshot.png)
