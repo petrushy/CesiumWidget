@@ -6,12 +6,14 @@
  * @version 0.1.0
  * @license Apache
 
-TODO: not sure css loading works, add CSS loading to /nbextensions/CesiumWidget/cesium/Build/Cesium/Widgets/widgets.css
 
  */
+var cesium_root = IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source'
+var cesium_path = cesium_root + '/Cesium';
 
-var cesium_path = IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Build/Cesium/Cesium';
 require.config({
+    baseUrl : cesium_root,
+        waitSeconds : 60,
     paths: {
         cesium: cesium_path
     },
@@ -27,26 +29,28 @@ define(
         'underscore',
         'widgets/js/widget',
         'widgets/js/manager',
-        '/nbextensions/CesiumWidget/cesium/Build/Cesium/Cesium.js'], function ($, _, widget, manager, Cesium) {
+        'cesium'], function ($, _, widget, manager, Cesium) {
         
         'use strict';
 
         var cssref = $('<link/>')
         .attr('rel', 'stylesheet')
         .attr('type', 'text/css')
-        .attr('href', IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Build/Cesium/Widgets/widgets.css')
+        .attr('href', IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source/Widgets/widgets.css')
         .appendTo($('head'));
-        console.log('Running function');
+        //console.log('Running function');
 
         var CesiumView = widget.DOMWidgetView.extend({
             
             render: function () {
                 CesiumView.__super__.render.apply(this, arguments);
-                console.log('Running Render');
-                console.log(this);
+                //console.log('Running Render');
+                //onsole.log(this);
+                //console.log(Cesium);
+
                 var WIDTH = this.model.get('width'),
                     HEIGHT = this.model.get('height');
-                var model = this.model;
+
                 this.$frame = $('<div/>').height(HEIGHT).width(WIDTH).uniqueId().appendTo(this.$el);
 
                 this.cesiumId = this.$frame[0].id;
@@ -75,7 +79,6 @@ define(
                 // Seems to need to be here to access the DIV id
                 if (!this.has_drawn) {
                     this.has_drawn = true;
-                    // Somehow Cesium isn't available here
                     this.viewer = new Cesium.Viewer(this.cesiumId);
                 }
 
