@@ -25,3 +25,9 @@ This would for example enable:
 * ...
 
 
+Screenshot
+----------
+This is from a hack prototype:
+<p align="center">
+<img src="https://github.com/petrushy/CesiumWidget/screenshot.png" width="50%" />
+</p>
