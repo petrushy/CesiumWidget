@@ -46,10 +46,14 @@ define(
                 this.has_drawn = false;
 
                 // call an update once the node has been added to the DOM
+                // TODO: Some problem here?
 
                 //_.defer(_.bind(this.update, this));
                 // Wait for element to be added to the DOM
-                this.once('displayed', this.update, this);
+                //this.once('displayed', this.myupdate, this);
+
+                this.after_displayed(this.update, this);
+                //return this;
 
             },
 
@@ -64,6 +68,7 @@ define(
                 // Seems to need to be here to access the DIV id
                 if (!this.has_drawn) {
                     this.has_drawn = true;
+                    // Somehow Cesium isn't available here
                     this.viewer = new Cesium.Viewer(this.cesiumId);
                 }
 
@@ -75,11 +80,11 @@ define(
                 this.viewer.dataSources.add(cz);
 
                 // call __super__.update to handle housekeeping
-                return CesiumView.__super__.update.apply(this, arguments);
+                //return CesiumView.__super__.update.apply(this, arguments);
             }
 
         }); 
-
+        
         return {
             CesiumView: CesiumView }
     });
