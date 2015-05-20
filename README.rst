@@ -28,6 +28,4 @@ This would for example enable:
 Screenshot
 ----------
 This is from a hack prototype:
-<p align="center">
-<img src="https://raw.githubusercontent.com/petrushy/CesiumWidget/master/screenshot.png" width="50%" />
-</p>
+![Screenshot](https://raw.githubusercontent.com/petrushy/CesiumWidget/master/screenshot.png)
