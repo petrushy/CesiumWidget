@@ -44,7 +44,7 @@ define(
             
             render: function () {
                 CesiumView.__super__.render.apply(this, arguments);
-                //console.log('Running Render');
+                console.log('Running Render');
                 //onsole.log(this);
                 //console.log(Cesium);
 
@@ -52,9 +52,9 @@ define(
                     HEIGHT = this.model.get('height');
 
                 this.$frame = $('<div/>').height(HEIGHT).width(WIDTH).uniqueId().appendTo(this.$el);
-
                 this.cesiumId = this.$frame[0].id;
                 this.has_drawn = false;
+
 
                 // call an update once the node has been added to the DOM
                 // TODO: Some problem here?
@@ -66,6 +66,8 @@ define(
                 this.after_displayed(that.myupdate, that);
                 //return this;
 
+                this.model.on('change:czml', this.myupdate, this);
+
             },
 
 
@@ -76,7 +78,6 @@ define(
                 console.log('Running Update');
 
                 // Create Cesiumjs Viewer if not already there
-                // Seems to need to be here to access the DIV id
                 if (!this.has_drawn) {
                     this.has_drawn = true;
                     this.viewer = new Cesium.Viewer(this.cesiumId);
