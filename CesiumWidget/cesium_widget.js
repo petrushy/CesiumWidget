@@ -11,8 +11,9 @@ var cesium_root = IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/
 var cesium_path = cesium_root + '/Cesium';
 
 require.config({
-    baseUrl : cesium_root,
-        waitSeconds : 60,
+    baseUrl: cesium_root,
+    urlArgs: "",
+    waitSeconds: 60,
     paths: {
         cesium: cesium_path
     },
@@ -29,23 +30,21 @@ define(
         'widgets/js/widget',
         'widgets/js/manager',
         'cesium'], function ($, _, widget, manager, Cesium) {
-        
+
         'use strict';
 
+        // Add cesium CSS link
         var cssref = $('<link/>')
-        .attr('rel', 'stylesheet')
-        .attr('type', 'text/css')
-        .attr('href', IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source/Widgets/widgets.css')
-        .appendTo($('head'));
-        //console.log('Running function');
+            .attr('rel', 'stylesheet')
+            .attr('type', 'text/css')
+            .attr('href', IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source/Widgets/widgets.css')
+            .appendTo($('head'));
 
         var CesiumView = widget.DOMWidgetView.extend({
-            
+
             render: function () {
                 CesiumView.__super__.render.apply(this, arguments);
                 //console.log('Running Render');
-                //onsole.log(this);
-                //console.log(Cesium);
 
                 var WIDTH = this.model.get('width'),
                     HEIGHT = this.model.get('height');
@@ -54,56 +53,79 @@ define(
                 this.cesiumId = this.$frame[0].id;
                 this.has_drawn = false;
 
-
-                // call an update once the node has been added to the DOM
-                // TODO: Some problem here?
-
-                //_.defer(_.bind(this.update, this));
                 // Wait for element to be added to the DOM
                 //this.once('displayed', this.myupdate, this);
 
-                this.after_displayed(this.myupdate, this);
-                //return this;
+                this.after_displayed(this.init_viewer, this);
             },
 
-
-            // Do things that are updated every time `this.model` is changed...
+            // Update: Do things that are updated every time `this.model` is changed...
             // on the front-end or backend.
 
-            myupdate: function () {
+            init_viewer: function () {
                 console.log('Running Update');
 
                 // Create Cesiumjs Viewer if not already there
                 if (!this.has_drawn) {
                     this.has_drawn = true;
-                    this.viewer = new Cesium.Viewer(this.cesiumId);
+
+                    var timeline = this.model.get('timeline');
+                    
+                    this.viewer = new Cesium.Viewer(this.cesiumId,{
+                        timeline: timeline
+                    });
+
+                    this.viewer.fullscreenButton.viewModel.fullscreenElement = this.viewer.container.childNodes[0];
                 }
-                
-               this.update_czml();
-               this.model.on('change:czml', this.update_czml, this);
+
+                this.update_czml();
+                this.model.on('change:czml', this.update_czml, this);
+                this.update_kml();
+                this.model.on('change:kml', this.update_kml, this);
 
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
             },
 
-            update_czml: function(){
+            update_czml: function () {
                 console.log('Update CZML!');
                 // Add or update the CZML
                 var czml_string = this.model.get('czml');
                 if (!$.isEmptyObject(czml_string)) {
                     var data = $.parseJSON(czml_string);
                     var cz = new Cesium.CzmlDataSource();
-                
+
                     cz.load(data, 'Python CZML');
+                    if (!$.isEmptyObject(this.czml)) {
+                        this.viewer.dataSources.remove(this.czml,true);
+                    }
                     console.log(cz);
-                    this.viewer.dataSources.removeAll(true);
+                    
                     this.viewer.dataSources.add(cz);
+                    this.czml = cz;
+                }
+            },
+
+                update_kml: function () {
+                console.log('Update KML!');
+                // Add or update the KML
+                var kml_string = this.model.get('kml_url');
+                if (!$.isEmptyObject(kml_string)) {
+                    //var data = $.parseJSON(kml_string);
+                    var kml = new Cesium.KmlDataSource();
+
+                    kml.load(kml_string, 'Python KML');
+                    if (!$.isEmptyObject(this.kml)) {
+                        this.viewer.dataSources.remove(this.kml,true);
+                    }
+                    console.log(kml);
+                    
+                    this.viewer.dataSources.add(kml);
+                    this.kml = kml;
                 }
             }
+        });
 
-        }); 
-        
-        return {
-            CesiumView: CesiumView }
+        return { CesiumView: CesiumView }
     });
 
