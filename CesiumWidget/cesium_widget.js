@@ -90,9 +90,10 @@ define(
 
                     if (sceneModes[sceneMode_name])
                         var sceneMode = sceneModes[sceneMode_name];
-                    else
+                    else {
                         var sceneMode = Cesium.SceneMode.SCENE3D;
                         console.log('Illegal scene_mode received')
+                        }
 
                     this.viewer = new Cesium.Viewer(this.cesiumId,{
                         timeline: timeline,
@@ -111,6 +112,9 @@ define(
 
                     this.viewer.fullscreenButton.viewModel.fullscreenElement = this.viewer.container.childNodes[0];
                 }
+
+                var enableLighting = this.model.get('enable_lighting');
+                this.viewer.scene.globe.enableLighting = enableLighting;
 
                 this.update_czml();
                 this.model.on('change:czml', this.update_czml, this);
