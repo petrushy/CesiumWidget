@@ -31,7 +31,8 @@ setup(
     url='https://github.com/petrushy/CesiumWidget',
     packages=['CesiumWidget'],  # find_packages(exclude=('tests', 'docs')),
     install_requires=["jupyter-pip"],
-    cmdclass=cmdclass('CesiumWidget'),
+    # user=False on cmdclass installs in distribution IPython, without installs in user/.ipython
+    cmdclass=cmdclass('CesiumWidget', user=False),
     include_package_data=True,
     license="Apache",
     zip_safe=False,
