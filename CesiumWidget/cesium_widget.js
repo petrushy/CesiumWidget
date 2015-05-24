@@ -70,9 +70,43 @@ define(
                     this.has_drawn = true;
 
                     var timeline = this.model.get('timeline');
-                    
+                    var animation = this.model.get('animation');
+                    var baseLayerPicker = this.model.get('base_layer_picker');
+                    var geocoder = this.model.get('geocoder');
+                    var homeButton = this.model.get('home_button');
+                    var infoBox = this.model.get('infobox');
+                    var sceneModePicker = this.model.get('scene_mode_picker');
+                    var selectionIndicator = this.model.get('selection_indicator');
+                    var navigationHelpButton = this.model.get('navigation_help_button');
+                    var navigationInstructionsInitiallyVisible = this.model.get('navigation_instructions_initially_visible');
+                    var scene3DOnly = this.model.get('scene_3D_only');
+                    var sceneMode_name = this.model.get('scene_mode');
+
+                    var sceneModes = {
+                        'COLUMBUS_VIEW': Cesium.SceneMode.COLUMBUS_VIEW,
+                        'SCENE2D': Cesium.SceneMode.SCENE2D,
+                        'SCENE3D': Cesium.SceneMode.SCENE3D
+                    };
+
+                    if (sceneModes[sceneMode_name])
+                        var sceneMode = sceneModes[sceneMode_name];
+                    else
+                        var sceneMode = Cesium.SceneMode.SCENE3D;
+                        console.log('Illegal scene_mode received')
+
                     this.viewer = new Cesium.Viewer(this.cesiumId,{
-                        timeline: timeline
+                        timeline: timeline,
+                        animation: animation,
+                        baseLayerPicker: baseLayerPicker,
+                        geocoder: geocoder,
+                        homeButton: homeButton,
+                        infoBox: infoBox,
+                        sceneModePicker: sceneModePicker,
+                        selectionIndicator: selectionIndicator,
+                        navigationHelpButton: navigationHelpButton,
+                        navigationInstructionsInitiallyVisible: navigationInstructionsInitiallyVisible,
+                        scene3DOnly: scene3DOnly,
+                        sceneMode: sceneMode
                     });
 
                     this.viewer.fullscreenButton.viewModel.fullscreenElement = this.viewer.container.childNodes[0];
