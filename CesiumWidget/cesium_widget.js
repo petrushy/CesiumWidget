@@ -113,8 +113,8 @@ define(
                     this.viewer.fullscreenButton.viewModel.fullscreenElement = this.viewer.container.childNodes[0];
                 }
 
-                var enableLighting = this.model.get('enable_lighting');
-                this.viewer.scene.globe.enableLighting = enableLighting;
+                this.update_lightning();
+                this.model.on('change:enable_lightning', this.update_lightning, this);
 
                 this.update_czml();
                 this.model.on('change:czml', this.update_czml, this);
@@ -123,6 +123,11 @@ define(
 
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
+            },
+
+            update_lightning: function() {
+                var enableLighting = this.model.get('enable_lighting');
+                this.viewer.scene.globe.enableLighting = enableLighting;
             },
 
             update_czml: function () {
