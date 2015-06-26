@@ -23,6 +23,7 @@ class CesiumWidget(DOMWidget):
     navigation_help_button = Bool(True, sync=True)
     navigation_instructions_initially_visible = Bool(False, sync=True)
     scene_3D_only = Bool(False, sync=True)
-    scene_mode = CaselessStrEnum(['COLUMBUS_VIEW','SCENE2D','SCENE3D'], default_value='SCENE3D', allow_none=False, sync=True)
+    scene_mode = CaselessStrEnum(['COLUMBUS_VIEW', 'SCENE2D', 'SCENE3D'], default_value='SCENE3D',
+                                 allow_none=False, sync=True)
     enable_lighting = Bool(False, sync=True)
 
