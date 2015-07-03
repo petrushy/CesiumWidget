@@ -2,8 +2,7 @@
 CesiumWidget
 ===============================
 
-This is an attempt to make a Cesiumjs http://cesiumjs.org/ world globe widget for the IPython (jupyter) notebook.
-
+This is an IPython widget for Cesiumjs, http://cesiumjs.org/, a world globe widget.
 
 For license on Cesiumjs see http://cesiumjs.org/index.html
 
@@ -11,22 +10,19 @@ CesiumWidget part of code is under Apache license
 
 Features
 --------
-Right now the widget doesn't work and is in development. Currently this is more a proof-of-concept. All help welcome :)
+The widget is in development with features such as CZML and KML.
+All help welcome :)
 
-The vision is to have the Cesium viewer as a dynamic widget in the IPython notebook
-http://cesiumjs.org/Cesium/Build/Apps/CesiumViewer/index.html
+The vision is to have a widget for representing orbits, geo-related informations in an efficient
+way.
 
-This would for example enable:
-* 4-D visualization of satellite orbits
+Roadmap still to be written but visioned features are:
+* Time readout and control of widget from python
 * Interface with czml
-* Direct interface accessing javascript methods?
-* Numpy-like interface to quickly plot stuff
+* Pyplot-like interface to quickly plot stuff
 * GeoJSON mapping
-* ...
 
 
 Screenshot
 ----------
-This is from a hack prototype:
-
 ![Screenshot](screenshot.jpg)
