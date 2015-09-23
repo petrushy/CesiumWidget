@@ -11,6 +11,7 @@ class CesiumWidget(DOMWidget):
 
     czml = Unicode(sync=True)
     kml_url = Unicode(sync=True)
+    geojson = Unicode(sync=True)
 
     zoomto = Unicode(sync=True)
     flyto = Unicode(sync=True)
