@@ -128,6 +128,7 @@ define(
                 this.model.on('change:flyto', this.fly_to, this);
                 this.zoom_to();
                 this.model.on('change:zoomto', this.zoom_to, this);
+
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
             },
