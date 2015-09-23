@@ -120,8 +120,6 @@ define(
                 this.model.on('change:czml', this.update_czml, this);
                 this.update_kml();
                 this.model.on('change:kml', this.update_kml, this);
-                this.update_geojson();
-                this.model.on('change:geojson', this.update_geojson, this);
 
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
@@ -150,6 +148,7 @@ define(
                     this.czml = cz;
                 }
             },
+
 
             update_geojson: function () {
                 console.log('Update geojson!');
