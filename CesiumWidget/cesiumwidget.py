@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from IPython.html.widgets import DOMWidget
-from IPython.utils.traitlets import Int, Unicode, Bool, CaselessStrEnum, Enum
+from ipywidgets import DOMWidget
+from traitlets import Int, Unicode, Bool, CaselessStrEnum, Enum
 
 
 class CesiumWidget(DOMWidget):
