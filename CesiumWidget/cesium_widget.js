@@ -7,7 +7,7 @@
  * @license Apache
  */
 
-var cesium_root = IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source'
+var cesium_root = IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source';
 var cesium_path = cesium_root + '/Cesium';
 
 require.config({
@@ -120,6 +120,8 @@ define(
                 this.model.on('change:czml', this.update_czml, this);
                 this.update_kml();
                 this.model.on('change:kml', this.update_kml, this);
+                this.update_geojson();
+                this.model.on('change:geojson', this.update_geojson, this);
 
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
@@ -149,6 +151,42 @@ define(
                 }
             },
 
+            update_geojson: function () {
+                console.log('Update geojson!');
+                // Add or update the CZML
+                var geojson_string = this.model.get('geojson');
+                if (!$.isEmptyObject(geojson_string)) {
+                    var data = $.parseJSON(geojson_string);
+                    var gjson = new Cesium.GeoJsonDataSource();
+
+                    gjson.load(data, 'Python geojson');
+                    if (!$.isEmptyObject(this.geojson)) {
+                        this.viewer.dataSources.remove(this.geojson,true);
+                    }
+                    console.log(gjson);
+                    this.viewer.dataSources.add(gjson);
+                    this.geojson = gjson;
+                }
+            },
+
+            update_kml: function () {
+                console.log('Update KML!');
+                // Add or update the KML
+                var kml_string = this.model.get('kml_url');
+                if (!$.isEmptyObject(kml_string)) {
+                    //var data = $.parseJSON(kml_string);
+                    var kml = new Cesium.KmlDataSource();
+
+                    kml.load(kml_string, 'Python KML');
+                    if (!$.isEmptyObject(this.kml)) {
+                        this.viewer.dataSources.remove(this.kml,true);
+                    }
+                    console.log(kml);
+                    
+                    this.viewer.dataSources.add(kml);
+                    this.kml = kml;
+                }
+            },
 
             fly_to: function () {
             	console.log('fly to location!');
@@ -183,27 +221,11 @@ define(
 					    });
 				}
 				console.log(pos);
-            },
-
-            update_kml: function () {
-                console.log('Update KML!');
-                // Add or update the KML
-                var kml_string = this.model.get('kml_url');
-                if (!$.isEmptyObject(kml_string)) {
-                    //var data = $.parseJSON(kml_string);
-                    var kml = new Cesium.KmlDataSource();
-
-                    kml.load(kml_string, 'Python KML');
-                    if (!$.isEmptyObject(this.kml)) {
-                        this.viewer.dataSources.remove(this.kml,true);
-                    }
-                    console.log(kml);
-                    
-                    this.viewer.dataSources.add(kml);
-                    this.kml = kml;
-                }
             }
         });
+
+
+
 
         return { CesiumView: CesiumView }
     });
