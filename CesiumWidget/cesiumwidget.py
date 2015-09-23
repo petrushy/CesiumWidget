@@ -11,6 +11,7 @@ class CesiumWidget(DOMWidget):
 
     czml = Unicode(sync=True)
     kml_url = Unicode(sync=True)
+    geojson = Unicode(sync=True)
     
     animation = Bool(True, sync=True)
     base_layer_picker = Bool(True, sync=True)
