@@ -120,6 +120,8 @@ define(
                 this.model.on('change:czml', this.update_czml, this);
                 this.update_kml();
                 this.model.on('change:kml', this.update_kml, this);
+                this.update_geojson();
+                this.model.on('change:geojson', this.update_geojson, this);
 
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
@@ -149,40 +151,22 @@ define(
                 }
             },
 
+            update_geojson: function () {
+                console.log('Update geojson!');
+                // Add or update the CZML
+                var geojson_string = this.model.get('geojson');
+                if (!$.isEmptyObject(geojson_string)) {
+                    var data = $.parseJSON(geojson_string);
+                    var gjson = new Cesium.GeoJsonDataSource();
 
-            fly_to: function () {
-            	console.log('fly to location!');
-				// move the camera to a location
-				var flyto = this.model.get('flyto');
-				if (!$.isEmptyObject(flyto)) {
-					var pos = flyto.split(",");
-					this.viewer.camera.flyTo({
-					        destination : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
-					        orientation : {
-					            heading : Cesium.Math.toRadians(Number(pos[3])),
-					            pitch : Cesium.Math.toRadians(Number(pos[4])),
-					            roll : Cesium.Math.toRadians(Number(pos[5]))
-					        }
-					    });
-				}
-				console.log(pos);
-            },
-
-
-            zoom_to: function () {
-            	console.log('zoom to a location!');
-				// move the camera to a location
-				var zoomto = this.model.get('zoomto');
-				if (!$.isEmptyObject(zoomto)) {
-					var pos = zoomto.split(",");
-					this.viewer.camera.setView({
-					        position : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
-					        heading : Cesium.Math.toRadians(Number(pos[3])),
-					        pitch : Cesium.Math.toRadians(Number(pos[4])),
-					        roll : Cesium.Math.toRadians(Number(pos[5]))
-					    });
-				}
-				console.log(pos);
+                    gjson.load(data, 'Python geojson');
+                    if (!$.isEmptyObject(this.geojson)) {
+                        this.viewer.dataSources.remove(this.geojson,true);
+                    }
+                    console.log(gjson);
+                    this.viewer.dataSources.add(gjson);
+                    this.geojson = gjson;
+                }
             },
 
             update_kml: function () {
