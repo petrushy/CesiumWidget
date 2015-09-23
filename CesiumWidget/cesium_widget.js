@@ -149,7 +149,43 @@ define(
                 }
             },
 
-                update_kml: function () {
+
+            fly_to: function () {
+            	console.log('fly to location!');
+				// move the camera to a location
+				var flyto = this.model.get('flyto');
+				if (!$.isEmptyObject(flyto)) {
+					var pos = flyto.split(",");
+					this.viewer.camera.flyTo({
+					        destination : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
+					        orientation : {
+					            heading : Cesium.Math.toRadians(Number(pos[3])),
+					            pitch : Cesium.Math.toRadians(Number(pos[4])),
+					            roll : Cesium.Math.toRadians(Number(pos[5]))
+					        }
+					    });
+				}
+				console.log(pos);
+            },
+
+
+            zoom_to: function () {
+            	console.log('zoom to a location!');
+				// move the camera to a location
+				var zoomto = this.model.get('zoomto');
+				if (!$.isEmptyObject(zoomto)) {
+					var pos = zoomto.split(",");
+					this.viewer.camera.setView({
+					        position : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
+					        heading : Cesium.Math.toRadians(Number(pos[3])),
+					        pitch : Cesium.Math.toRadians(Number(pos[4])),
+					        roll : Cesium.Math.toRadians(Number(pos[5]))
+					    });
+				}
+				console.log(pos);
+            },
+
+            update_kml: function () {
                 console.log('Update KML!');
                 // Add or update the KML
                 var kml_string = this.model.get('kml_url');

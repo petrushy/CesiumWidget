@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from IPython.html.widgets import DOMWidget
-from IPython.utils.traitlets import Int, Unicode, Bool, CaselessStrEnum, Enum
+from ipywidgets import DOMWidget
+from traitlets import Int, Unicode, Bool, CaselessStrEnum, Enum
 
 
 class CesiumWidget(DOMWidget):
@@ -11,6 +11,9 @@ class CesiumWidget(DOMWidget):
 
     czml = Unicode(sync=True)
     kml_url = Unicode(sync=True)
+
+    zoomto = Unicode(sync=True)
+    flyto = Unicode(sync=True)
     
     animation = Bool(True, sync=True)
     base_layer_picker = Bool(True, sync=True)
