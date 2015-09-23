@@ -120,6 +120,8 @@ define(
                 this.model.on('change:czml', this.update_czml, this);
                 this.update_kml();
                 this.model.on('change:kml', this.update_kml, this);
+                this.update_geojson();
+                this.model.on('change:geojson', this.update_geojson, this);
 
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
@@ -149,7 +151,25 @@ define(
                 }
             },
 
-                update_kml: function () {
+            update_geojson: function () {
+                console.log('Update geojson!');
+                // Add or update the CZML
+                var geojson_string = this.model.get('geojson');
+                if (!$.isEmptyObject(geojson_string)) {
+                    var data = $.parseJSON(geojson_string);
+                    var gjson = new Cesium.GeoJsonDataSource();
+
+                    gjson.load(data, 'Python geojson');
+                    if (!$.isEmptyObject(this.geojson)) {
+                        this.viewer.dataSources.remove(this.geojson,true);
+                    }
+                    console.log(gjson);
+                    this.viewer.dataSources.add(gjson);
+                    this.geojson = gjson;
+                }
+            },
+
+            update_kml: function () {
                 console.log('Update KML!');
                 // Add or update the KML
                 var kml_string = this.model.get('kml_url');
