@@ -16,6 +16,7 @@ class CesiumWidget(DOMWidget):
     #zoomto = Unicode(sync=True)
     _zoomto = List(sync=True, trait=Float, allow_none=True)
     _flyto = List(sync=True, trait=Float, allow_none=True)
+    _zoomtoregion = List(sync=True, trait=Float, allow_none=True)
     
     animation = Bool(True, sync=True)
     base_layer_picker = Bool(True, sync=True)
