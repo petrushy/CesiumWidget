@@ -39,16 +39,7 @@ define(
             .attr('type', 'text/css')
             .attr('href', IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source/Widgets/widgets.css')
             .appendTo($('head'));
-			
-		var lat = 10
-		var lon = 20
-		//IPython.notebook.kernel.execute( "IPython.core.display.display('Lat: %s , Lon: %s - metadata saved' % (lat,lon), metadata={'ecoop_prov': 'jsonld'})");
-		IPython.notebook.kernel.execute("cesium_picker = []");
-        IPython.notebook.kernel.execute("python_var = '" + lat + "'");
-		//IPython.notebook.kernel.execute("cesium_picker.append('" + lat + "')");	
-		IPython.notebook.kernel.execute("IPython.core.display.display('show this text')");
-		IPython.notebook.kernel.execute("cesium_picker.append('" + lat + "')");
-		
+
         var CesiumView = widget.DOMWidgetView.extend({
 
             render: function () {
@@ -119,11 +110,7 @@ define(
                         sceneMode: sceneMode
                     });
 
-
                     this.viewer.fullscreenButton.viewModel.fullscreenElement = this.viewer.container.childNodes[0];
-					// try to add event actions 
-					// this dosn't give error!
-					// var handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
                 }
 
                 this.update_lightning();
@@ -135,9 +122,6 @@ define(
                 this.model.on('change:kml', this.update_kml, this);
                 this.update_geojson();
                 this.model.on('change:geojson', this.update_geojson, this);
-				
-                this.update_billboard();
-                this.model.on('change:billboard', this.update_billboard, this);
 
 
                 this.fly_to();
@@ -146,46 +130,14 @@ define(
                 this.model.on('change:_zoomto', this.zoom_to, this);
                 this.zoom_to_region();
                 this.model.on('change:_zoomtoregion', this.zoom_to_region, this);
-				
-                this.update_picked_position();
-                this.model.on('change:pick', this.update_picked_position, this);
-				
-
-
                 // call __super__.update to handle housekeeping
-                return CesiumView.__super__.update.apply(this, arguments);
+                //return CesiumView.__super__.update.apply(this, arguments);
             },
 
             update_lightning: function() {
                 var enableLighting = this.model.get('enable_lighting');
                 this.viewer.scene.globe.enableLighting = enableLighting;
             },
-
-            update_picked_position: function (){
-            	var pick_string = this.model.get('pick');
-				IPython.notebook.kernel.execute("python_var = '" + pick_string + "'");
-            },
-
-
-
-            update_billboard: function () {
-                console.log('Update billboard!');
-				// testing adding billboard
-				var bill_string = this.model.get('billboard');
-				var bill = bill_string.split(",");
-				var image = bill[0];
-				var lon = Number(bill[1]);
-				var lat = Number(bill[2]);
-				var entity = this.viewer.entities.add({
-				        position : Cesium.Cartesian3.fromDegrees(lon, lat),
-				        billboard : {
-				            image : image
-				        }
-				    });
-                    console.log(entity);
-                    this.entity = entity;
-            },
-
 
             update_czml: function () {
                 console.log('Update CZML!');
@@ -248,7 +200,7 @@ define(
 				// move the camera to a location
 				var flyto = this.model.get('_flyto');
 				if (!$.isEmptyObject(flyto)) {
-					var pos = flyto //.split(",");
+					var pos = flyto; //flyto.split(",");
 					this.viewer.camera.flyTo({
 					        destination : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
 					        orientation : {
@@ -257,6 +209,8 @@ define(
 					            roll : Cesium.Math.toRadians(Number(pos[5]))
 					        }
 					    });
+					this.model.set('_flyto', null);
+					this.touch()
 				}
 				console.log(pos);
             },
@@ -267,19 +221,19 @@ define(
 				// move the camera to a location
 				var zoomto = this.model.get('_zoomto');
 				if (!$.isEmptyObject(zoomto)) {
-					var pos = zoomto // .split(",");
+					var pos = zoomto; //.split(",");
 					this.viewer.camera.setView({
 					        position : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
 					        heading : Cesium.Math.toRadians(Number(pos[3])),
 					        pitch : Cesium.Math.toRadians(Number(pos[4])),
 					        roll : Cesium.Math.toRadians(Number(pos[5]))
 					    });
+					    this.model.set('_zoomto', null);
+					    this.touch()
 				}
 				console.log(pos);
             },
-			
-			
-			
+            
             zoom_to_region: function () {
             	console.log('view region!');
 				// move the camera to a location
@@ -290,13 +244,18 @@ define(
 					this.viewer.camera.viewRectangle(rectangle);
 					this.model.set('_zoomtoregion', null);
 					this.touch();
+                                this.model.set('_zoomtoregion', null);
+			        this.touch()
 				}
 				console.log(region);
             }
+            });
 
-        });
+
 
 
         return { CesiumView: CesiumView }
     });
+    
+    
 
