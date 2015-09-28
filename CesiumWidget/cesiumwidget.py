@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from ipywidgets import DOMWidget
-from traitlets import Int, Unicode, Bool, CaselessStrEnum, Enum
+from traitlets import Int, Unicode, Bool, CaselessStrEnum, Enum, List, Float
 
 
 class CesiumWidget(DOMWidget):
@@ -13,8 +13,9 @@ class CesiumWidget(DOMWidget):
     kml_url = Unicode(sync=True)
     geojson = Unicode(sync=True)
 
-    zoomto = Unicode(sync=True)
-    flyto = Unicode(sync=True)
+    #zoomto = Unicode(sync=True)
+    _zoomto = List(sync=True, trait=Float)
+    _flyto = List(sync=True, trait=Float)
     
     animation = Bool(True, sync=True)
     base_layer_picker = Bool(True, sync=True)
@@ -31,3 +32,8 @@ class CesiumWidget(DOMWidget):
                                  allow_none=False, sync=True)
     enable_lighting = Bool(False, sync=True)
 
+    def zoom_to(self, lon, lat, alt, heading=0, pitch=-90, roll=0):
+        self._zoomto = [lon, lat, alt, heading, pitch, roll]
+
+    def fly_to(self, lon, lat, alt, heading=0, pitch=-90, roll=0):
+        self._flyto = [lon, lat, alt, heading, pitch, roll]
