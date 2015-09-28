@@ -125,10 +125,9 @@ define(
 
 
                 this.fly_to();
-                this.model.on('change:flyto', this.fly_to, this);
+                this.model.on('change:_flyto', this.fly_to, this);
                 this.zoom_to();
-                this.model.on('change:zoomto', this.zoom_to, this);
-
+                this.model.on('change:_zoomto', this.zoom_to, this);
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
             },
@@ -197,9 +196,9 @@ define(
             fly_to: function () {
             	console.log('fly to location!');
 				// move the camera to a location
-				var flyto = this.model.get('flyto');
+				var flyto = this.model.get('_flyto');
 				if (!$.isEmptyObject(flyto)) {
-					var pos = flyto.split(",");
+					var pos = flyto; //flyto.split(",");
 					this.viewer.camera.flyTo({
 					        destination : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
 					        orientation : {
@@ -216,9 +215,9 @@ define(
             zoom_to: function () {
             	console.log('zoom to a location!');
 				// move the camera to a location
-				var zoomto = this.model.get('zoomto');
+				var zoomto = this.model.get('_zoomto');
 				if (!$.isEmptyObject(zoomto)) {
-					var pos = zoomto.split(",");
+					var pos = zoomto; //.split(",");
 					this.viewer.camera.setView({
 					        position : Cesium.Cartesian3.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2])),
 					        heading : Cesium.Math.toRadians(Number(pos[3])),
