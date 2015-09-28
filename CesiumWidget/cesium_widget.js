@@ -207,6 +207,8 @@ define(
 					            roll : Cesium.Math.toRadians(Number(pos[5]))
 					        }
 					    });
+					this.model.set('_flyto', null);
+					this.touch()
 				}
 				console.log(pos);
             },
@@ -224,6 +226,8 @@ define(
 					        pitch : Cesium.Math.toRadians(Number(pos[4])),
 					        roll : Cesium.Math.toRadians(Number(pos[5]))
 					    });
+					    this.model.set('_zoomto', null);
+					    this.touch()
 				}
 				console.log(pos);
             }

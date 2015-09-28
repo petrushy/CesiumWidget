@@ -14,8 +14,8 @@ class CesiumWidget(DOMWidget):
     geojson = Unicode(sync=True)
 
     #zoomto = Unicode(sync=True)
-    _zoomto = List(sync=True, trait=Float)
-    _flyto = List(sync=True, trait=Float)
+    _zoomto = List(sync=True, trait=Float, allow_none=True)
+    _flyto = List(sync=True, trait=Float, allow_none=True)
     
     animation = Bool(True, sync=True)
     base_layer_picker = Bool(True, sync=True)
