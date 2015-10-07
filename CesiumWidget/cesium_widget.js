@@ -230,6 +230,20 @@ define(
 					    this.touch()
 				}
 				console.log(pos);
+            },
+            
+            zoom_to_region: function () {
+            	console.log('view region!');
+				// move the camera to a location
+				var region = this.model.get('_zoomtoregion');
+				if (!$.isEmptyObject(region)) {
+					var pos = region // .split(",");
+					var rectangle = Cesium.Rectangle.fromDegrees(Number(pos[0]), Number(pos[1]), Number(pos[2]), Number(pos[3]));
+					this.viewer.camera.viewRectangle(rectangle);
+					this.model.set('_zoomtoregion', null);
+					this.touch();
+				}
+				console.log(region);
             }
         });
 
