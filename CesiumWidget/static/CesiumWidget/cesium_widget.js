@@ -27,8 +27,8 @@ require.config({
 define(
     ['jquery',
         'underscore',
-        'widgets/js/widget',
-        'widgets/js/manager',
+        'nbextensions/widgets/widgets/js/widget',
+        'nbextensions/widgets/widgets/js/manager',
         'cesium'], function ($, _, widget, manager, Cesium) {
 
         'use strict';
@@ -37,7 +37,7 @@ define(
         var cssref = $('<link/>')
             .attr('rel', 'stylesheet')
             .attr('type', 'text/css')
-            .attr('href', IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source/Widgets/widgets.css')
+            .attr('href', cesium_root + '/Widgets/widgets.css')
             .appendTo($('head'));
 
         var CesiumView = widget.DOMWidgetView.extend({
@@ -45,6 +45,7 @@ define(
             render: function () {
                 CesiumView.__super__.render.apply(this, arguments);
                 //console.log('Running Render');
+                _.bindAll(this, "init_viewer");
 
                 var WIDTH = this.model.get('width'),
                     HEIGHT = this.model.get('height');
@@ -54,9 +55,7 @@ define(
                 this.has_drawn = false;
 
                 // Wait for element to be added to the DOM
-                //this.once('displayed', this.myupdate, this);
-
-                this.after_displayed(this.init_viewer, this);
+                this.displayed.then(this.init_viewer);
             },
 
             // Update: Do things that are updated every time `this.model` is changed...
@@ -88,10 +87,12 @@ define(
                         'SCENE3D': Cesium.SceneMode.SCENE3D
                     };
 
+                    var sceneMode;
+
                     if (sceneModes[sceneMode_name])
-                        var sceneMode = sceneModes[sceneMode_name];
+                        sceneMode = sceneModes[sceneMode_name];
                     else {
-                        var sceneMode = Cesium.SceneMode.SCENE3D;
+                        sceneMode = Cesium.SceneMode.SCENE3D;
                         console.log('Illegal scene_mode received')
                         }
 
@@ -114,20 +115,20 @@ define(
                 }
 
                 this.update_lightning();
-                this.model.on('change:enable_lightning', this.update_lightning, this);
+                this.listenTo(this.model, 'change:enable_lightning', this.update_lightning);
 
                 this.update_czml();
-                this.model.on('change:czml', this.update_czml, this);
+                this.listenTo(this.model, 'change:czml', this.update_czml);
                 this.update_kml();
-                this.model.on('change:kml', this.update_kml, this);
+                this.listenTo(this.model, 'change:kml_url', this.update_kml);
                 this.update_geojson();
-                this.model.on('change:geojson', this.update_geojson, this);
+                this.listenTo(this.model, 'change:geojson', this.update_geojson);
 
 
                 this.fly_to();
-                this.model.on('change:_flyto', this.fly_to, this);
+                this.listenTo(this.model, 'change:_flyto', this.fly_to);
                 this.zoom_to();
-                this.model.on('change:_zoomto', this.zoom_to, this);
+                this.listenTo(this.model, 'change:_zoomto', this.zoom_to);
                 // call __super__.update to handle housekeeping
                 //return CesiumView.__super__.update.apply(this, arguments);
             },
@@ -140,17 +141,15 @@ define(
             update_czml: function () {
                 console.log('Update CZML!');
                 // Add or update the CZML
-                var czml_string = this.model.get('czml');
-                if (!$.isEmptyObject(czml_string)) {
-                    var data = $.parseJSON(czml_string);
+                var data = this.model.get('czml');
+                if (data && data.length) {
                     var cz = new Cesium.CzmlDataSource();
-
                     cz.load(data, 'Python CZML');
-                    if (!$.isEmptyObject(this.czml)) {
-                        this.viewer.dataSources.remove(this.czml,true);
+                    if (!this.czml) {
+                        this.viewer.dataSources.remove(this.czml, true);
                     }
                     console.log(cz);
-                    
+
                     this.viewer.dataSources.add(cz);
                     this.czml = cz;
                 }
@@ -184,10 +183,10 @@ define(
 
                     kml.load(kml_string, 'Python KML');
                     if (!$.isEmptyObject(this.kml)) {
-                        this.viewer.dataSources.remove(this.kml,true);
+                        this.viewer.dataSources.remove(this.kml, true);
                     }
                     console.log(kml);
-                    
+
                     this.viewer.dataSources.add(kml);
                     this.kml = kml;
                 }
@@ -238,4 +237,3 @@ define(
 
         return { CesiumView: CesiumView }
     });
-
