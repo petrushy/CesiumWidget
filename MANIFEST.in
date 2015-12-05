@@ -1,1 +1,10 @@
-include CesiumWidget/static/*
+include LICENSE
+include *.rst
+include *.md
+
+recursive-include CesiumWidget *
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude node_modules *.*
+recursive-exclude * .git
