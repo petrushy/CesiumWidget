@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from setuptools import setup, find_packages
+from setuptools import setup
 
 readme = open('README.md').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
@@ -13,7 +13,8 @@ setup(
     author='Petrus Hyvonen',
     author_email='petrus.hyvonen@gmail.com',
     url='https://github.com/petrushy/CesiumWidget',
-    packages=find_packages(),
+    packages=['CesiumWidget'],
+    install_requires=['ipywidgets'],
     include_package_data=True,
     license="Apache",
     zip_safe=False,
