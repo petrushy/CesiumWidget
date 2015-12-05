@@ -2,16 +2,6 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-# This section installs the jupyter-pip if not installed
-try:
-    from jupyterpip import cmdclass
-except:
-    import pip
-    import importlib
-
-    pip.main(['install', 'jupyter-pip'])
-    cmdclass = importlib.import_module('jupyterpip').cmdclass
-
 readme = open('README.md').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
@@ -24,8 +14,7 @@ setup(
     author_email='petrus.hyvonen@gmail.com',
     url='https://github.com/petrushy/CesiumWidget',
     packages=['CesiumWidget'],
-    install_requires=['jupyter-pip', 'ipywidgets'],
-    cmdclass=cmdclass('CesiumWidget', user=True),
+    install_requires=['ipywidgets'],
     include_package_data=True,
     license="Apache",
     zip_safe=False,
