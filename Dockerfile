@@ -8,3 +8,4 @@ RUN git clone https://github.com/bollwyvl/CesiumWidget.git --depth=1
 WORKDIR CesiumWidget
 
 RUN pip install .
+RUN jupyter nbextension install CesiumWidget --user
