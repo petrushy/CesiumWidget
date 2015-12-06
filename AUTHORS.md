@@ -7,7 +7,7 @@ Contributors
 Below is a list of the people who have made CesiumWidget better by contributing code, architecture, suggestions,
 bug reports and/or documentation. Your contributions are highly appreciated!
 
-- Epifano
+- Massimo Di Stefano
 - Nicholas Bollweg
 
 
