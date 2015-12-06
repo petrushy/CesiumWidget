@@ -19,4 +19,4 @@ WORKDIR CesiumWidget
 RUN python setup.py install
 # jupyter-pip so crazy. this is cheating, as a real user wouldn't have
 # the source checked out...
-RUN jupyter nbextension install CesiumWidget --user --quiet
+RUN jupyter nbextension install CesiumWidget/static/CesiumWidget --user --quiet
