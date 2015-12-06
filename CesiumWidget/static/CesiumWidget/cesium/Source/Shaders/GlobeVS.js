@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "attribute vec4 position3DAndHeight;\n\
 attribute vec3 textureCoordAndEncodedNormals;\n\
@@ -11,7 +11,7 @@ uniform vec4 u_tileRectangle;\n\
 \n\
 // Uniforms for 2D Mercator projection\n\
 uniform vec2 u_southAndNorthLatitude;\n\
-uniform vec3 u_southMercatorYLowAndHighAndOneOverHeight;\n\
+uniform vec2 u_southMercatorYAndOneOverHeight;\n\
 \n\
 varying vec3 v_positionMC;\n\
 varying vec3 v_positionEC;\n\
@@ -19,6 +19,12 @@ varying vec3 v_positionEC;\n\
 varying vec2 v_textureCoordinates;\n\
 varying vec3 v_normalMC;\n\
 varying vec3 v_normalEC;\n\
+\n\
+#ifdef FOG\n\
+varying float v_distance;\n\
+varying vec3 v_mieColor;\n\
+varying vec3 v_rayleighColor;\n\
+#endif\n\
 \n\
 // These functions are generated at runtime.\n\
 vec4 getPosition(vec3 position3DWC);\n\
@@ -42,13 +48,12 @@ float get2DMercatorYPositionFraction()\n\
     float northLatitude = u_southAndNorthLatitude.y;\n\
     if (northLatitude - southLatitude > maxTileWidth)\n\
     {\n\
-        float southMercatorYLow = u_southMercatorYLowAndHighAndOneOverHeight.x;\n\
-        float southMercatorYHigh = u_southMercatorYLowAndHighAndOneOverHeight.y;\n\
-        float oneOverMercatorHeight = u_southMercatorYLowAndHighAndOneOverHeight.z;\n\
+        float southMercatorY = u_southMercatorYAndOneOverHeight.x;\n\
+        float oneOverMercatorHeight = u_southMercatorYAndOneOverHeight.y;\n\
 \n\
         float currentLatitude = mix(southLatitude, northLatitude, textureCoordAndEncodedNormals.y);\n\
         currentLatitude = clamp(currentLatitude, -czm_webMercatorMaxLatitude, czm_webMercatorMaxLatitude);\n\
-        positionFraction = czm_latitudeToWebMercatorFraction(currentLatitude, southMercatorYLow, southMercatorYHigh, oneOverMercatorHeight);\n\
+        positionFraction = czm_latitudeToWebMercatorFraction(currentLatitude, southMercatorY, oneOverMercatorHeight);\n\
     }    \n\
     return positionFraction;\n\
 }\n\
@@ -103,6 +108,12 @@ void main() \n\
 #endif\n\
 \n\
     v_textureCoordinates = textureCoordAndEncodedNormals.xy;\n\
-}\n\
-";
+    \n\
+#ifdef FOG\n\
+    AtmosphereColor atmosColor = computeGroundAtmosphereFromSpace(position3DWC);\n\
+    v_mieColor = atmosColor.mie;\n\
+    v_rayleighColor = atmosColor.rayleigh;\n\
+    v_distance = length((czm_modelView3D * vec4(position3DWC, 1.0)).xyz);\n\
+#endif\n\
+}";
 });

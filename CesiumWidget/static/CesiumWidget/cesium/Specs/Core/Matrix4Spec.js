@@ -14,7 +14,6 @@ defineSuite([
         Matrix3,
         Quaternion) {
     "use strict";
-    /*global jasmine,describe,xdescribe,it,xit,expect,beforeEach,afterEach,beforeAll,afterAll,spyOn*/
 
     it('default constructor creates values array with all zeros.', function() {
         var matrix = new Matrix4();
@@ -660,6 +659,14 @@ defineSuite([
         var expected = Matrix4.multiply(m, Matrix4.fromScale(scale), new Matrix4());
         var result = new Matrix4();
         var returnedResult = Matrix4.multiplyByScale(m, scale, result);
+        expect(returnedResult).toBe(result);
+        expect(result).toEqual(expected);
+
+        m = new Matrix4(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 0, 0, 1);
+        scale = new Cartesian3(2.0, 3.0, 4.0);
+        expected = Matrix4.multiply(m, Matrix4.fromScale(scale), new Matrix4());
+        result = new Matrix4();
+        returnedResult = Matrix4.multiplyByScale(m, scale, result);
         expect(returnedResult).toBe(result);
         expect(result).toEqual(expected);
     });
@@ -1673,14 +1680,13 @@ defineSuite([
 
     it('computeInfinitePerspectiveOffCenter throws without near', function() {
         expect(function() {
-            var left = 0, right = 0, bottom = 0, top = 0, far = 0;
+            var left = 0, right = 0, bottom = 0, top = 0;
             Matrix4.computeInfinitePerspectiveOffCenter (left, right, bottom, top, 0);
         }).toThrowDeveloperError();
     });
 
     it('computeViewportTransformation works', function() {
         expect(function() {
-            var left = 0, right = 0, bottom = 0, top = 0, far = 0;
             Matrix4.computeViewportTransformation ({
                 x : 0,
                 y : 0,

@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "/**\n\
  * Returns the WGS84 ellipsoid, with its center at the origin of world coordinates, in eye coordinates.\n\

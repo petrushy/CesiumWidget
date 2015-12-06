@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "/**\n\
  * Decodes a unit-length vector in 'oct' encoding to a normalized 3-component Cartesian vector.\n\

@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "varying vec3 v_positionEC;\n\
 varying vec3 v_normalEC;\n\
@@ -13,7 +13,7 @@ void main()\n\
     vec3 positionToEyeEC = -v_positionEC; \n\
     mat3 tangentToEyeMatrix = czm_tangentToEyeSpaceMatrix(v_normalEC, v_tangentEC, v_binormalEC);\n\
 \n\
-	vec3 normalEC = normalize(v_normalEC);\n\
+    vec3 normalEC = normalize(v_normalEC);\n\
 #ifdef FACE_FORWARD\n\
     normalEC = faceforward(normalEC, vec3(0.0, 0.0, 1.0), -normalEC);\n\
 #endif\n\
