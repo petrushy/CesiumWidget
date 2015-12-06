@@ -18,7 +18,9 @@ RUN /home/main/anaconda/envs/python3/bin/pip install \
     ipywidgets
 
 
-RUN git clone https://github.com/petrushy/CesiumWidget.git --depth=1
+#RUN git clone https://github.com/petrushy/CesiumWidget.git --depth=1
+RUN git clone  https://github.com/OSGeo-live/CesiumWidget --depth=1
+
 
 WORKDIR CesiumWidget
 
