@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "/**\n\
  * @private\n\
@@ -9,7 +9,12 @@ vec4 czm_translucentPhong(vec3 toEye, czm_material material)\n\
 {\n\
     // Diffuse from directional light sources at eye (for top-down and horizon views)\n\
     float diffuse = czm_getLambertDiffuse(vec3(0.0, 0.0, 1.0), material.normal);\n\
-    diffuse += czm_getLambertDiffuse(vec3(0.0, 1.0, 0.0), material.normal);\n\
+    \n\
+    if (czm_sceneMode == czm_sceneMode3D) {\n\
+        // (and horizon views in 3D)\n\
+        diffuse += czm_getLambertDiffuse(vec3(0.0, 1.0, 0.0), material.normal);\n\
+    }\n\
+    \n\
     diffuse = clamp(diffuse, 0.0, 1.0);\n\
 \n\
     // Specular from sun and pseudo-moon\n\
