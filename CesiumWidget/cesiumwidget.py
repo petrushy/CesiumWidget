@@ -14,7 +14,7 @@ from traitlets import (
 class CesiumWidget(DOMWidget):
     # the name of the Backbone.View subclass to be used
     _view_name = Unicode('CesiumView', sync=True)
-    _view_module = Unicode('nbextensions/CesiumWidget/cesium_widget',
+    _view_module = Unicode('nbextensions/CesiumWidget/static/CesiumWidget/cesium_widget',
                            sync=True)
 
     czml = Tuple(sync=True)
