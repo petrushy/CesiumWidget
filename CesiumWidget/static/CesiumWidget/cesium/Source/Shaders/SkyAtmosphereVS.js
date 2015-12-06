@@ -29,9 +29,9 @@
  *
  * Modifications made by Analytical Graphics, Inc.
  */
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "/**\n\
  * @license\n\
@@ -98,7 +98,6 @@ const float fSamples = 2.0;\n\
 varying vec3 v_rayleighColor;\n\
 varying vec3 v_mieColor;\n\
 varying vec3 v_toCamera;\n\
-varying vec3 v_positionEC;\n\
 \n\
 float scale(float fCos)\n\
 {\n\
@@ -161,7 +160,6 @@ void main(void)\n\
     v_mieColor = v3FrontColor * fKmESun;\n\
     v_rayleighColor = v3FrontColor * (v3InvWavelength * fKrESun);\n\
     v_toCamera = czm_viewerPositionWC - v3Pos;\n\
-    v_positionEC = (czm_modelView * position).xyz;\n\
     gl_Position = czm_modelViewProjection * position;\n\
 }\n\
 ";

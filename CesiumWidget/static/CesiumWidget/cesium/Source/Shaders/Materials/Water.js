@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "// Thanks for the contribution Jonas\n\
 // http://29a.ch/2012/7/19/webgl-terrain-rendering-water-fog\n\

@@ -24,13 +24,13 @@ define([
      * @exports loadWithXhr
      *
      * @param {Object} options Object with the following properties:
-     * @param {String|Promise} options.url The URL of the data, or a promise for the URL.
+     * @param {String|Promise.<String>} options.url The URL of the data, or a promise for the URL.
      * @param {String} [options.responseType] The type of response.  This controls the type of item returned.
      * @param {String} [options.method='GET'] The HTTP method to use.
      * @param {String} [options.data] The data to send with the request, if any.
      * @param {Object} [options.headers] HTTP headers to send with the request, if any.
      * @param {String} [options.overrideMimeType] Overrides the MIME type returned by the server.
-     * @returns {Promise} a promise that will resolve to the requested data when loaded.
+     * @returns {Promise.<Object>} a promise that will resolve to the requested data when loaded.
      *
      * @see loadArrayBuffer
      * @see loadBlob
@@ -150,7 +150,7 @@ define([
         }
 
         xhr.onload = function() {
-            if (xhr.status === 200) {
+            if (xhr.status >= 200 && xhr.status < 300) {
                 if (defined(xhr.response)) {
                     deferred.resolve(xhr.response);
                 } else {

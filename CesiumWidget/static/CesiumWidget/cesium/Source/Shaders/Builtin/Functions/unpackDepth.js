@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "/**\n\
  * Unpacks a vec3 depth depth value to a float.\n\
@@ -14,7 +14,7 @@
  */\n\
  float czm_unpackDepth(vec4 packedDepth)\n\
  {\n\
-    // See Aras Pranckeviƒ?ius' post Encoding Floats to RGBA\n\
+    // See Aras Pranckeviƒçius' post Encoding Floats to RGBA\n\
     // http://aras-p.info/blog/2009/07/30/encoding-floats-to-rgba-the-final/\n\
     return dot(packedDepth, vec4(1.0, 1.0 / 255.0, 1.0 / 65025.0, 1.0 / 160581375.0));\n\
  }\n\

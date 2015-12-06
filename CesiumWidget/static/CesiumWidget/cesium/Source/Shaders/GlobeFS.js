@@ -1,6 +1,6 @@
-    //This file is automatically rebuilt by the Cesium build process.
-    /*global define*/
-    define(function() {
+//This file is automatically rebuilt by the Cesium build process.
+/*global define*/
+define(function() {
     "use strict";
     return "//#define SHOW_TILE_BOUNDARIES\n\
 \n\
@@ -57,6 +57,12 @@ varying vec2 v_textureCoordinates;\n\
 varying vec3 v_normalMC;\n\
 varying vec3 v_normalEC;\n\
 \n\
+#ifdef FOG\n\
+varying float v_distance;\n\
+varying vec3 v_rayleighColor;\n\
+varying vec3 v_mieColor;\n\
+#endif\n\
+\n\
 vec4 sampleAndBlend(\n\
     vec4 previousColor,\n\
     sampler2D texture,\n\
@@ -86,9 +92,9 @@ vec4 sampleAndBlend(\n\
     vec2 translation = textureCoordinateTranslationAndScale.xy;\n\
     vec2 scale = textureCoordinateTranslationAndScale.zw;\n\
     vec2 textureCoordinates = tileTextureCoordinates * scale + translation;\n\
-    vec4 sample = texture2D(texture, textureCoordinates);\n\
-    vec3 color = sample.rgb;\n\
-    float alpha = sample.a;\n\
+    vec4 value = texture2D(texture, textureCoordinates);\n\
+    vec3 color = value.rgb;\n\
+    float alpha = value.a;\n\
     \n\
 #ifdef APPLY_BRIGHTNESS\n\
     color = mix(vec3(0.0), color, textureBrightness);\n\
@@ -162,7 +168,7 @@ void main()\n\
 \n\
 #ifdef ENABLE_VERTEX_LIGHTING\n\
     float diffuseIntensity = clamp(czm_getLambertDiffuse(czm_sunDirectionEC, normalize(v_normalEC)) * 0.9 + 0.3, 0.0, 1.0);\n\
-    gl_FragColor = vec4(color.rgb * diffuseIntensity, color.a);\n\
+    vec4 finalColor = vec4(color.rgb * diffuseIntensity, color.a);\n\
 #elif defined(ENABLE_DAYNIGHT_SHADING)\n\
     float diffuseIntensity = clamp(czm_getLambertDiffuse(czm_sunDirectionEC, normalEC) * 5.0 + 0.3, 0.0, 1.0);\n\
     float cameraDist = length(czm_view[3]);\n\
@@ -170,9 +176,20 @@ void main()\n\
     float fadeInDist = u_lightingFadeDistance.y;\n\
     float t = clamp((cameraDist - fadeOutDist) / (fadeInDist - fadeOutDist), 0.0, 1.0);\n\
     diffuseIntensity = mix(1.0, diffuseIntensity, t);\n\
-    gl_FragColor = vec4(color.rgb * diffuseIntensity, color.a);\n\
+    vec4 finalColor = vec4(color.rgb * diffuseIntensity, color.a);\n\
 #else\n\
-    gl_FragColor = color;\n\
+    vec4 finalColor = color;\n\
+#endif\n\
+\n\
+\n\
+#ifdef FOG\n\
+    const float fExposure = 2.0;\n\
+    vec3 fogColor = v_mieColor + finalColor.rgb * v_rayleighColor;\n\
+    fogColor = vec3(1.0) - exp(-fExposure * fogColor);\n\
+    \n\
+    gl_FragColor = vec4(czm_fog(v_distance, finalColor.rgb, fogColor), finalColor.a);\n\
+#else\n\
+    gl_FragColor = finalColor;\n\
 #endif\n\
 }\n\
 \n\
@@ -229,8 +246,8 @@ vec4 computeWaterColor(vec3 positionEyeCoordinates, vec2 textureCoordinates, mat
     float highAltitudeFade = linearFade(0.0, 60000.0, positionToEyeECLength);\n\
     float lowAltitudeFade = 1.0 - linearFade(20000.0, 60000.0, positionToEyeECLength);\n\
     vec3 normalTangentSpace = \n\
-    	(highAltitudeFade * normalTangentSpaceHighAltitude) + \n\
-    	(lowAltitudeFade * normalTangentSpaceLowAltitude);\n\
+        (highAltitudeFade * normalTangentSpaceHighAltitude) + \n\
+        (lowAltitudeFade * normalTangentSpaceLowAltitude);\n\
     normalTangentSpace = normalize(normalTangentSpace);\n\
     \n\
     // fade out the normal perturbation as we move farther from the water surface\n\
