@@ -1,6 +1,10 @@
 FROM andrewosh/binder-base
 
-# no root stuff to do!
+USER root
+
+RUN echo "root:root" | chpasswd
+RUN echo "main:main" | chpasswd
+
 USER main
 
 # install demo support
@@ -27,4 +31,4 @@ RUN /home/main/anaconda/envs/python3/bin/python setup.py install
 
 # jupyter-pip so crazy. this is cheating, as a real user wouldn't have
 # the source checked out...
-RUN jupyter nbextension install CesiumWidget/static/CesiumWidget --user --quiet
+RUN jupyter nbextension install CesiumWidget --user --quiet
