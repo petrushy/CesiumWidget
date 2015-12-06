@@ -14,7 +14,7 @@ from traitlets import (
 class CesiumWidget(DOMWidget):
     # the name of the Backbone.View subclass to be used
     _view_name = Unicode('CesiumView', sync=True)
-    _view_module = Unicode('nbextensions/CesiumWidget/static/CesiumWidget/cesium_widget',
+    _view_module = Unicode('nbextensions/CesiumWidget/cesium_widget',
                            sync=True)
 
     czml = Tuple(sync=True)
@@ -24,7 +24,6 @@ class CesiumWidget(DOMWidget):
     _zoomto = List(sync=True, trait=Float, allow_none=True)
     _flyto = List(sync=True, trait=Float, allow_none=True)
     _zoomtoregion = List(sync=True, trait=Float, allow_none=True)
-
 
     animation = Bool(True, sync=True)
     base_layer_picker = Bool(True, sync=True)
@@ -48,6 +47,6 @@ class CesiumWidget(DOMWidget):
 
     def fly_to(self, lon, lat, alt, heading=0, pitch=-90, roll=0):
         self._flyto = [lon, lat, alt, heading, pitch, roll]
-        
+
     def zoom_to_region(self, west, south, east, north):
         self._zoomtoregion = [west, south, east, north]

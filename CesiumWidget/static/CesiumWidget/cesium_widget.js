@@ -7,7 +7,7 @@
  * @license Apache
  */
 
-var cesium_root = IPython.notebook.base_url + 'nbextensions/CesiumWidget/static/CesiumWidget/cesium/Source';
+var cesium_root = IPython.notebook.base_url + 'nbextensions/CesiumWidget/cesium/Source';
 var cesium_path = cesium_root + '/Cesium';
 
 require.config({
@@ -232,7 +232,7 @@ define(
 				}
 				console.log(pos);
             },
-            
+
             zoom_to_region: function () {
             	console.log('view region!');
 				// move the camera to a location
