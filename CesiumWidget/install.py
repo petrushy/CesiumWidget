@@ -20,7 +20,7 @@ def install(enable=False, **kwargs):
     """
     from notebook.nbextensions import install_nbextension
 
-    directory = join(dirname(abspath(__file__)), 'static', 'CesiumWidget')
+    directory = dirname(abspath(__file__))
 
     kwargs = {k: v for k, v in kwargs.items() if not (v is None)}
 
