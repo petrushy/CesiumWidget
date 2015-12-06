@@ -11,8 +11,7 @@ RUN conda install \
     czml \
     geocoder
 
-# TODO: change this to `petrushy`
-RUN git clone https://github.com/bollwyvl/CesiumWidget.git --depth=1
+RUN git clone https://github.com/petrushy/CesiumWidget.git --depth=1
 
 WORKDIR CesiumWidget
 
