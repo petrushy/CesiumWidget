@@ -39,7 +39,7 @@ simple_czml =[
         ]
       },
       "scale":1.0,
-      "show":true,
+      "show":"true",
       "style":"FILL",
       "text":"AGI",
       "verticalOrigin":"CENTER"
