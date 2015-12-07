@@ -1,6 +1,11 @@
 FROM andrewosh/binder-base
 
-# no root stuff to do!
+USER root
+
+RUN echo "root:root" | chpasswd
+RUN echo "main:main" | chpasswd
+
+
 USER main
 
 # install demo support
