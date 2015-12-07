@@ -86,87 +86,87 @@ complex_czml = [
       "show":[
         {
           "interval":"0000-01-01T00:00:00Z/2012-03-15T10:16:06.97400000000198Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T10:16:06.97400000000198Z/2012-03-15T10:33:59.3549999999959Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T10:33:59.3549999999959Z/2012-03-15T11:04:09.73799999999756Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T11:04:09.73799999999756Z/2012-03-15T11:21:04.51900000000023Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T11:21:04.51900000000023Z/2012-03-15T11:52:06.94400000000314Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T11:52:06.94400000000314Z/2012-03-15T12:08:18.8840000000055Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T12:08:18.8840000000055Z/2012-03-15T12:40:57.2069999999949Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T12:40:57.2069999999949Z/2012-03-15T12:54:39.301999999996Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T12:54:39.301999999996Z/2012-03-15T13:29:44.5040000000008Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T13:29:44.5040000000008Z/2012-03-15T13:41:05.96899999999732Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T13:41:05.96899999999732Z/2012-03-15T14:20:16.8450000000012Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T14:20:16.8450000000012Z/2012-03-15T14:25:48.0559999999969Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T14:25:48.0559999999969Z/2012-03-16T07:01:44.4309999999823Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-16T07:01:44.4309999999823Z/2012-03-16T07:06:19.6309999999939Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-16T07:06:19.6309999999939Z/2012-03-16T07:46:00.457999999984168Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-16T07:46:00.457999999984168Z/2012-03-16T07:57:20.8470000000088Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-16T07:57:20.8470000000088Z/2012-03-16T08:32:14.5289999999804Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-16T08:32:14.5289999999804Z/2012-03-16T08:46:17.0109999999986Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-16T08:46:17.0109999999986Z/2012-03-16T09:18:28.4590000000026Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-16T09:18:28.4590000000026Z/2012-03-16T09:35:16.6410000000033Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-16T09:35:16.6410000000033Z/9999-12-31T24:00:00Z",
-          "boolean":false
+          "boolean":"false"
         }
       ],
       "width":1,
@@ -179,7 +179,7 @@ complex_czml = [
           }
         }
       },
-      "followSurface":false,
+      "followSurface":"false",
       "positions":{
         "references":[
           "Satellite/Geoeye1#position","Satellite/ISS#position"
@@ -199,59 +199,59 @@ complex_czml = [
       "show":[
         {
           "interval":"0000-01-01T00:00:00Z/2012-03-15T10:52:19.3940000000002Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T10:52:19.3940000000002Z/2012-03-15T11:02:24.5570000000007Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T11:02:24.5570000000007Z/2012-03-15T12:28:24.0339999999997Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T12:28:24.0339999999997Z/2012-03-15T12:38:34.6399999999994Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T12:38:34.6399999999994Z/2012-03-15T14:06:02.09799999999814Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T14:06:02.09799999999814Z/2012-03-15T14:14:48.5310000000027Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T14:14:48.5310000000027Z/2012-03-15T15:43:15.2350000000006Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T15:43:15.2350000000006Z/2012-03-15T15:52:06.56500000000233Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T15:52:06.56500000000233Z/2012-03-15T17:19:26.3190000000031Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T17:19:26.3190000000031Z/2012-03-15T17:29:36.0240000000049Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T17:29:36.0240000000049Z/2012-03-15T18:55:44.7079999999987Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-15T18:55:44.7079999999987Z/2012-03-15T19:05:17.7339999999967Z",
-          "boolean":true
+          "boolean":"true"
         },
         {
           "interval":"2012-03-15T19:05:17.7339999999967Z/2012-03-16T09:56:05.90600000001723Z",
-          "boolean":false
+          "boolean":"false"
         },
         {
           "interval":"2012-03-16T09:56:05.90600000001723Z/2012-03-16T10:00:00Z",
-          "boolean":true
+          "boolean":"true"
         }
       ],
       "width":1,
@@ -264,7 +264,7 @@ complex_czml = [
           }
         }
       },
-      "followSurface":false,
+      "followSurface":"false",
       "positions":{
         "references":[
           "Facility/AGI#position","Satellite/ISS#position"
@@ -278,7 +278,7 @@ complex_czml = [
     "parent":"9927edc4-e87a-4e1f-9b8b-0bfb3b05b227",
     "description":"<h2>No accesses</h2>",
     "polyline":{
-      "show":false,
+      "show":"false",
       "width":1,
       "material":{
         "solidColor":{
@@ -289,7 +289,7 @@ complex_czml = [
           }
         }
       },
-      "followSurface":false,
+      "followSurface":"false",
       "positions":{
         "references":[
           "Facility/AGI#position","Satellite/Geoeye1/Sensor/Sensor#position"
@@ -317,7 +317,7 @@ complex_czml = [
       },
       "outlineWidth":2,
       "scale":0.5,
-      "show":true,
+      "show":"true",
       "style":"FILL_AND_OUTLINE",
       "text":"Pennsylvania",
       "verticalOrigin":"CENTER"
@@ -330,7 +330,7 @@ complex_czml = [
       },
       "outlineWidth":0,
       "pixelSize":5,
-      "show":true
+      "show":"true"
     },
     "polygon":{
       "positions":{
@@ -347,8 +347,8 @@ complex_czml = [
           }
         }
       },
-      "fill":false,
-      "outline":true,
+      "fill":"false",
+      "outline":"true",
       "outlineColor":{
         "rgba":[
           255,0,0,255
@@ -380,7 +380,7 @@ complex_czml = [
         ]
       },
       "scale":1.5,
-      "show":true,
+      "show":"true",
       "verticalOrigin":"CENTER"
     },
     "label":{
@@ -403,7 +403,7 @@ complex_czml = [
         ]
       },
       "scale":0.5,
-      "show":true,
+      "show":"true",
       "style":"FILL_AND_OUTLINE",
       "text":"AGI",
       "verticalOrigin":"CENTER"
@@ -433,7 +433,7 @@ complex_czml = [
         ]
       },
       "scale":1.5,
-      "show":true,
+      "show":"true",
       "verticalOrigin":"CENTER"
     },
     "label":{
@@ -456,7 +456,7 @@ complex_czml = [
         ]
       },
       "scale":0.5,
-      "show":true,
+      "show":"true",
       "style":"FILL_AND_OUTLINE",
       "text":"Geoeye 1",
       "verticalOrigin":"CENTER"
@@ -465,7 +465,7 @@ complex_czml = [
       "show":[
         {
           "interval":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
-          "boolean":true
+          "boolean":"true"
         }
       ],
       "width":1,
@@ -1054,8 +1054,8 @@ complex_czml = [
       "xHalfAngle":0.03490658503988659,
       "yHalfAngle":0.1308996938995747,
       "radius":5e7,
-      "show":true,
-      "showIntersection":true,
+      "show":"true",
+      "showIntersection":"true",
       "intersectionColor":{
         "rgba":[
           91,141,42,255
@@ -1422,7 +1422,7 @@ complex_czml = [
         ]
       },
       "scale":1.5,
-      "show":true,
+      "show":"true",
       "verticalOrigin":"CENTER"
     },
     "label":{
@@ -1445,7 +1445,7 @@ complex_czml = [
         ]
       },
       "scale":0.5,
-      "show":true,
+      "show":"true",
       "style":"FILL_AND_OUTLINE",
       "text":"ISS",
       "verticalOrigin":"CENTER"
@@ -1454,7 +1454,7 @@ complex_czml = [
       "show":[
         {
           "interval":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
-          "boolean":true
+          "boolean":"true"
         }
       ],
       "width":1,
@@ -2074,7 +2074,7 @@ complex_czml = [
         ]
       },
       "scale":1,
-      "show":true,
+      "show":"true",
       "verticalOrigin":"CENTER"
     },
     "label":{
@@ -2097,7 +2097,7 @@ complex_czml = [
         ]
       },
       "scale":0.5,
-      "show":true,
+      "show":"true",
       "style":"FILL_AND_OUTLINE",
       "text":"Molniya 1-92",
       "verticalOrigin":"CENTER"
@@ -2106,7 +2106,7 @@ complex_czml = [
       "show":[
         {
           "interval":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
-          "boolean":true
+          "boolean":"true"
         }
       ],
       "width":1,
