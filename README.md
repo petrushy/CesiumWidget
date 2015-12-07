@@ -11,7 +11,7 @@ CesiumWidget part of code is under Apache license
 
 Try it Now
 ----------
-[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/OSGeo-live/CesiumWidget)
+[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/petrushy/CesiumWidget)
 
 Features
 --------
