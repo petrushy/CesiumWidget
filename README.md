@@ -13,7 +13,6 @@ Try it Now
 ----------
 [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/petrushy/CesiumWidget)
 
-
 Features
 --------
 The widget is in development and has currently basic features such as CZML and KML.
