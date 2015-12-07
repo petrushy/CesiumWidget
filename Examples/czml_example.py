@@ -1,5 +1,4 @@
-simple_czml = r"""
-[
+simple_czml =[
 { "id":"document", "version":"1.0" } ,
 {
   "id": "InternationalSpaceStation",
@@ -52,12 +51,12 @@ simple_czml = r"""
     }
   }
 
-]"""
-            
-            
+]
+
+
 # Example czml from Cesium repository
 
-complex_czml = r'''[
+complex_czml = [
   {
     "id":"document",
     "name":"simple",
@@ -2476,4 +2475,4 @@ complex_czml = r'''[
       ]
     }
   }
-]'''
+]
